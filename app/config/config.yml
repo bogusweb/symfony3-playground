@@ -8,6 +8,13 @@ imports:
 parameters:
     locale: en
 
+easy_admin:
+    entities:
+        - AppBundle\Entity\Product
+        - AppBundle\Entity\Pizza
+    design:
+          brand_color: '#1ABC9C'
+
 framework:
     #esi: ~
     #translator: { fallbacks: ['%locale%'] }
