@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
@@ -11,6 +12,11 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
  */
 class Genus
 {
+
+    public function __construct()
+    {
+        $this->notes = new ArrayCollection();
+    }
 
     /**
      * @ORM\Id
@@ -38,6 +44,12 @@ class Genus
      * @ORM\Column(type="string", nullable=true)
      */
     private $funFact;
+
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\GenusNote", mappedBy="genus")
+     * @ORM\OrderBy({"createdAt" = "DESC"})
+     */
+    private $notes;
 
     /**
      * @return mixed
@@ -116,6 +128,14 @@ class Genus
     public function setIsPublished($isPublished)
     {
         $this->isPublished = $isPublished;
+    }
+
+    /**
+     * @return arrayCollection|GenusNote[]
+     */
+    public function getNotes()
+    {
+        return $this->notes;
     }
 
 }
